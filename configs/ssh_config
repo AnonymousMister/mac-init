@@ -1,0 +1,22 @@
+# ==========================================
+# macOS SSH 配置文件 (~/.ssh/config)
+# ==========================================
+
+# 1. OrbStack 集成
+Include ~/.orbstack/ssh/config
+
+# 2. 1Password SSH Agent 全局认证
+Host *
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# 3. GitHub 走 443 端口穿透代理 (防止 22 端口在 Loon/代理环境下被阻断)
+Host github.com
+  Hostname ssh.github.com
+  Port 443
+  User git
+
+# 4. 远程机器
+Host 100.66.1.11
+  HostName 100.66.1.11
+  User zhang
+  ForwardAgent yes

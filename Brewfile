@@ -10,6 +10,7 @@ tap "nguyenphutrong/tap", trusted: true
 tap "sentient-os-labs/tap", trusted: { casks: ["sentient-os"] }
 tap "sunnyyoung/tap", trusted: true
 tap "wxtsky/tap", trusted: true
+tap "AnonymousMister/tap"
 
 # 2. Formula 命令行工具
 brew "goreleaser"
@@ -45,7 +46,11 @@ cask "switchhosts"
 cask "tailscale-app"
 cask "tencent-lemon"
 cask "termius"
-cask "wechat"
+cask "wechat-universal"
+cask "x1a0he-wechat-plugin"
+cask "xiaoheiribao"
+cask "loon"
+cask "wetype"
 
 # 4. Mac App Store (mas) 应用清单
 mas "1Password for Safari", id: 1569813296

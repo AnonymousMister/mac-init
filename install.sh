@@ -103,6 +103,14 @@ setup_base_env() {
   cp "$SCRIPT_DIR/configs/zprofile" "$HOME/.zprofile"
   cp "$SCRIPT_DIR/configs/zshrc" "$HOME/.zshrc"
   echo -e "${GREEN}✓ Shell 配置已同步 (集成 Loon 动态代理、微信多开别名及 AI 缓存隔离)。${NC}"
+
+  # 5. SSH 代理配置
+  echo -e "${YELLOW}>> 部署 ~/.ssh/config (配置 1Password Agent 与 GitHub 443 穿透)...${NC}"
+  mkdir -p "$HOME/.ssh"
+  [ -f "$HOME/.ssh/config" ] && cp "$HOME/.ssh/config" "$HOME/.ssh/config.bak.$(date +%Y%m%d%H%M%S)"
+  cp "$SCRIPT_DIR/configs/ssh_config" "$HOME/.ssh/config"
+  chmod 600 "$HOME/.ssh/config"
+  echo -e "${GREEN}✓ SSH 配置完成。${NC}"
 }
 
 # ------------------------------------------------------------------------------
