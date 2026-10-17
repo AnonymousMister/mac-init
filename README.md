@@ -42,23 +42,27 @@
 
 ## 🛡️ 核心亮点设计
 
-### 1. 彻底根治 AI 工具对 Home 目录的污染
+### 1. 增量与幂等性配置管理（零覆盖风险）
+- **绝不覆盖用户原有配置**：对 `~/.zprofile`、`~/.zshrc`、`~/.ssh/config` 采用特征标记块（`# >>> mac-init >>>`）注入机制。
+- **可重复执行（幂等性）**：多次运行仅更新标记块内部，绝不生成冗余的 `.bak` 残留文件，对用户原有的 PATH、别名及第三方工具配置做到真正的零破坏。
+
+### 2. 彻底根治 AI 工具对 Home 目录的污染
 - **痛点**：Hugging Face、PyTorch、Ollama、uv 等工具动辄在 `~` 目录下创建 `~/.cache`、`~/.huggingface` 等隐藏文件夹，塞满数 GB 的模型权重与缓存。
 - **解决方案**：全局部署 **XDG 基础目录规范**，并将所有大模型权重集中重定向至 `~/Developer/AI_Models`，方便集中监控、迁移或一键清理。
 
-### 2. 现代多语言版本管理 (`mise`)
+### 3. 现代多语言版本管理 (`mise`)
 - 彻底淘汰容易在 Home 目录下留下碎目录的旧工具（如 `nvm`、`sdkman`、`pyenv`）。
 - 统一由 Rust 编写的高性能工具 **[`mise`](https://github.com/jdx/mise)** 接管，自动安装并全局激活最新稳定版 **Go**、**Node.js** 与 **pnpm**。
 
-### 3. 官方原版微信 + 防撤回多开插件
+### 4. 官方原版微信 + 防撤回多开插件
 - 自动安装腾讯官网发布的 Universal 架构微信原版（绝非受沙箱限制的 MAS 版本）。
 - 自动从官方源下载最新版 [**X1a0HeWeChatPlugin**](https://github.com/X1a0He/X1a0HeWeChatPlugin) 插件并完成系统级静默注入，同时提供 `weixing` 多开命令行别名。
 
-### 4. 动态无感代理探测 (Loon / Clash)
+### 5. 动态无感代理探测 (Loon / Clash)
 - 无需硬编码代理端口。终端启动时自动通过 `networksetup` 探测当前 Wi-Fi 代理状态，动态提取端口并注入环境变量。
 - 支持 `proxy`（开启终端代理）与 `unproxy`（关闭代理）快捷命令。
 
-### 5. 1Password SSH Agent 远端隧道守护
+### 6. 1Password SSH Agent 远端隧道守护
 - 配置 LaunchAgent 开机守护进程（`com.zhang.mac-1password-agent-tunnel.plist`）。
 - 开机自启保活，将本地 1Password SSH Agent Socket 反向代理到远程开发机，支持断线自动检测重连与 NodeLink 进程状态监控。
 

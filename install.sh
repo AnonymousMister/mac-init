@@ -56,6 +56,48 @@ read_input() {
   fi
 }
 
+# 幂等写入或更新特定配置块（增量写入，绝不破坏文件内其他已有配置）
+inject_or_update_block() {
+  local target="$1"
+  local marker="$2"
+  local source="$3"
+  local start_tag="# >>> ${marker} >>>"
+  local end_tag="# <<< ${marker} <<<"
+
+  mkdir -p "$(dirname "$target")"
+  touch "$target"
+
+  if grep -qF "$start_tag" "$target"; then
+    awk -v s="$start_tag" -v e="$end_tag" -v sf="$source" '
+      $0 == s {
+        print s
+        while ((getline line < sf) > 0) {
+          print line
+        }
+        close(sf)
+        skip = 1
+        next
+      }
+      $0 == e {
+        skip = 0
+        print e
+        next
+      }
+      !skip { print }
+    ' "$target" > "$target.tmp" && mv "$target.tmp" "$target"
+  else
+    {
+      if [ -s "$target" ]; then
+        [ "$(tail -c 1 "$target" 2>/dev/null)" != "" ] && echo ""
+        echo ""
+      fi
+      echo "$start_tag"
+      cat "$source"
+      echo "$end_tag"
+    } >> "$target"
+  fi
+}
+
 # ------------------------------------------------------------------------------
 # 模块 1: 基础环境 (Command Line Tools + Homebrew + XDG/AI目录规范)
 # ------------------------------------------------------------------------------
@@ -96,21 +138,16 @@ setup_base_env() {
   mkdir -p "$HOME"/.config/mise "$HOME"/.local/share "$HOME"/.local/state "$HOME"/.local/bin
   echo -e "${GREEN}✓ 目录初始化完成 (~/Developer/AI_Models, ~/.config 等)。${NC}"
 
-  echo -e "${YELLOW}>> 部署 ~/.zprofile 与 ~/.zshrc...${NC}"
-  [ -f "$HOME/.zprofile" ] && cp "$HOME/.zprofile" "$HOME/.zprofile.bak.$(date +%Y%m%d%H%M%S)"
-  [ -f "$HOME/.zshrc" ] && cp "$HOME/.zshrc" "$HOME/.zshrc.bak.$(date +%Y%m%d%H%M%S)"
-
-  cp "$SCRIPT_DIR/configs/zprofile" "$HOME/.zprofile"
-  cp "$SCRIPT_DIR/configs/zshrc" "$HOME/.zshrc"
-  echo -e "${GREEN}✓ Shell 配置已同步 (集成 Loon 动态代理、微信多开别名及 AI 缓存隔离)。${NC}"
+  echo -e "${YELLOW}>> 增量部署 ~/.zprofile 与 ~/.zshrc...${NC}"
+  inject_or_update_block "$HOME/.zprofile" "mac-init" "$SCRIPT_DIR/configs/zprofile"
+  inject_or_update_block "$HOME/.zshrc" "mac-init" "$SCRIPT_DIR/configs/zshrc"
+  echo -e "${GREEN}✓ Shell 配置已增量同步 (包含 XDG 规范、AI 集中重定向与动态代理)。${NC}"
 
   # 5. SSH 代理配置
-  echo -e "${YELLOW}>> 部署 ~/.ssh/config (配置 1Password Agent 与 GitHub 443 穿透)...${NC}"
-  mkdir -p "$HOME/.ssh"
-  [ -f "$HOME/.ssh/config" ] && cp "$HOME/.ssh/config" "$HOME/.ssh/config.bak.$(date +%Y%m%d%H%M%S)"
-  cp "$SCRIPT_DIR/configs/ssh_config" "$HOME/.ssh/config"
+  echo -e "${YELLOW}>> 增量部署 ~/.ssh/config (配置 1Password Agent 与 GitHub 443 穿透)...${NC}"
+  inject_or_update_block "$HOME/.ssh/config" "mac-init" "$SCRIPT_DIR/configs/ssh_config"
   chmod 600 "$HOME/.ssh/config"
-  echo -e "${GREEN}✓ SSH 配置完成。${NC}"
+  echo -e "${GREEN}✓ SSH 配置已增量同步。${NC}"
 }
 
 # ------------------------------------------------------------------------------
@@ -161,7 +198,10 @@ restore_mise_runtimes() {
 
   echo -e "${YELLOW}>> 部署 mise 全局配置...${NC}"
   mkdir -p "$HOME/.config/mise"
-  cp "$SCRIPT_DIR/configs/mise.toml" "$HOME/.config/mise/config.toml"
+  if [ ! -f "$HOME/.config/mise/config.toml" ]; then
+    cp "$SCRIPT_DIR/configs/mise.toml" "$HOME/.config/mise/config.toml"
+  fi
+  mise use -g go@latest node@latest pnpm@latest >/dev/null 2>&1 || true
 
   echo -e "${YELLOW}>> 正在安装全局工具 (Go, Node, pnpm)...${NC}"
   mise install
