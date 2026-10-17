@@ -10,6 +10,7 @@ tap "nguyenphutrong/tap", trusted: true
 tap "sentient-os-labs/tap", trusted: { casks: ["sentient-os"] }
 tap "sunnyyoung/tap", trusted: true
 tap "wxtsky/tap", trusted: true
+tap "pangmo5/tap", trusted: true
 tap "AnonymousMister/tap", trusted: true
 
 # 2. Formula 命令行工具
