@@ -80,6 +80,3 @@ fi
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
-
-# CodeBuddy
-[ -d "$HOME/.codebuddy/bin" ] && export PATH="$HOME/.codebuddy/bin:$PATH"

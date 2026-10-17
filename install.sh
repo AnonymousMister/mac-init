@@ -143,7 +143,15 @@ setup_base_env() {
   inject_or_update_block "$HOME/.zshrc" "mac-init" "$SCRIPT_DIR/configs/zshrc"
   echo -e "${GREEN}✓ Shell 配置已增量同步 (包含 XDG 规范、AI 集中重定向与动态代理)。${NC}"
 
-  # 5. SSH 代理配置
+  # 5. Starship 主题配置
+  if [ -f "$SCRIPT_DIR/configs/starship.toml" ]; then
+    echo -e "${YELLOW}>> 部署 Starship 终端提示符配置...${NC}"
+    mkdir -p "$HOME/.config"
+    cp "$SCRIPT_DIR/configs/starship.toml" "$HOME/.config/starship.toml"
+    echo -e "${GREEN}✓ Starship 主题配置已就绪 (~/.config/starship.toml)。${NC}"
+  fi
+
+  # 6. SSH 代理配置
   echo -e "${YELLOW}>> 增量部署 ~/.ssh/config (配置 1Password Agent 与 GitHub 443 穿透)...${NC}"
   inject_or_update_block "$HOME/.ssh/config" "mac-init" "$SCRIPT_DIR/configs/ssh_config"
   chmod 600 "$HOME/.ssh/config"
