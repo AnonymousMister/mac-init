@@ -1,0 +1,5 @@
+# mise 全局运行时工具配置
+[tools]
+go = "latest"
+node = "latest"
+pnpm = "latest"
