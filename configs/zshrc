@@ -1,5 +1,14 @@
 # ==========================================
-# 1. 规范目录配置 (XDG Base Directory Specification)
+# 1. 核心运行环境加载 (Homebrew & 1Password)
+# ==========================================
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi
+
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# ==========================================
+# 2. 规范目录配置 (XDG Base Directory Specification)
 # 杜绝 CLI 与 AI 工具在 $HOME 目录下随意生成隐藏目录
 # ==========================================
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -8,7 +17,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # ==========================================
-# 2. AI 工具模型与缓存集中重定向
+# 3. AI 工具模型与缓存集中重定向
 # 统一存储到 ~/Developer/AI_Models，方便监控与一键清理
 # ==========================================
 export AI_DATA_DIR="$HOME/Developer/AI_Models"
@@ -18,7 +27,7 @@ export OLLAMA_MODELS="$AI_DATA_DIR/ollama"
 export UV_CACHE_DIR="$HOME/Library/Caches/uv"
 
 # ==========================================
-# 3. 动态终端代理管理 (自动适配 Loon / Clash)
+# 4. 动态终端代理管理 (自动适配 Loon / Clash)
 # ==========================================
 tproxy() {
     local action="${1:-status}"
@@ -67,7 +76,7 @@ if networksetup -getwebproxy Wi-Fi 2>/dev/null | grep -q "Enabled: Yes"; then
 fi
 
 # ==========================================
-# 4. 提示符与运行时激活
+# 5. 提示符与运行时激活
 # ==========================================
 export PATH="$HOME/.local/bin:$PATH"
 
