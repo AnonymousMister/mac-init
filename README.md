@@ -74,9 +74,9 @@
 `mise` (运行时管理)、`uv` (Python极速包管理)、`starship` (跨平台终端提示符)、`mas` (Mac App Store命令行)、`rtk`、`smartmontools`、`telnet`、`goreleaser`
 
 ### 桌面 GUI 软件 (Cask)
-- **开发与运维**：`orbstack`、`jetbrains-toolbox`、`apifox`、`termius`、`remote-desktop-manager`、`font-jetbrains-mono-nerd-font`
-- **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`libreoffice`、`keka`
-- **网络与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat`
+- **开发与运维**：`orbstack`、`jetbrains-toolbox`、`apifox`、`termius`、`remote-desktop-manager`、`codebuddy-cn`、`font-jetbrains-mono-nerd-font`
+- **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`libreoffice`、`keka`、`xiaoheiribao` (小黑日报)
+- **网络、云盘与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-universal`、`x1a0he-wechat-plugin`、`wetype` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`loon`
 
 ### Mac App Store 应用 (mas 共 25 款)
 - **通信与协作**：`钉钉`、`飞书`、`QQ`、`Telegram`、`腾讯会议`
