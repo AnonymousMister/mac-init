@@ -57,6 +57,7 @@ cask "workbuddy-cn"
 cask "123pan"
 cask "feiniu-sync"
 cask "swiftycrow"
+cask "logi-options-plus-mini"
 
 # 4. Mac App Store (mas) 应用清单
 mas "1Password for Safari", id: 1569813296
