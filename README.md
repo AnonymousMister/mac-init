@@ -6,10 +6,10 @@
 
 ## 🚀 重装系统后一键运行（直链免下载）
 
-在新装好的 Mac 终端中直接粘贴并运行以下单行命令（将 `<username>` 替换为您的 GitHub 用户名）：
+在新装好的 Mac 终端中直接粘贴并运行以下单行命令：
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/<username>/mac-init/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/AnonymousMister/mac-init/main/install.sh)"
 ```
 
 > **特点**：
@@ -55,16 +55,8 @@
 
 ---
 
-## 🛠️ 如何推送到您的 GitHub 仓库
-
-1. 在 GitHub 上新建一个名为 `mac-init` 的公开仓库（Public）。
-2. 在本地进入 `mac-init` 文件夹：
-   ```bash
-   cd /Users/zhang/Documents/日常/mac-init
-   git init
-   git add .
-   git commit -m "feat: 初始化 macOS 极简恢复工具"
-   git branch -M main
-   git remote add origin https://github.com/<您的用户名>/mac-init.git
-   git push -u origin main
-   ```
+## 🛠️ 推送到您的 GitHub 仓库
+```bash
+cd /Users/zhang/Documents/日常/mac-init
+git push -u origin main
+```

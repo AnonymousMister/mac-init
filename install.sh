@@ -15,8 +15,8 @@ RED='\033[0;31m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-# GitHub 仓库配置 (推送到您的仓库后请修改此处或通过环境变量传入)
-GITHUB_USER="${GITHUB_USER:-pingzhejiaktn}"
+# GitHub 仓库配置
+GITHUB_USER="${GITHUB_USER:-AnonymousMister}"
 GITHUB_REPO="${GITHUB_REPO:-mac-init}"
 GITHUB_BRANCH="${GITHUB_BRANCH:-main}"
 
