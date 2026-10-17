@@ -10,7 +10,7 @@ tap "nguyenphutrong/tap", trusted: true
 tap "sentient-os-labs/tap", trusted: { casks: ["sentient-os"] }
 tap "sunnyyoung/tap", trusted: true
 tap "wxtsky/tap", trusted: true
-tap "AnonymousMister/tap"
+tap "AnonymousMister/tap", trusted: true
 
 # 2. Formula 命令行工具
 brew "goreleaser"
