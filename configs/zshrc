@@ -18,42 +18,56 @@ export OLLAMA_MODELS="$AI_DATA_DIR/ollama"
 export UV_CACHE_DIR="$HOME/Library/Caches/uv"
 
 # ==========================================
-# 3. 动态代理管理 (自动适配 Loon / Clash)
+# 3. 动态终端代理管理 (自动适配 Loon / Clash)
 # ==========================================
-proxy() {
+tproxy() {
+    local action="${1:-status}"
     local wifi_name="Wi-Fi"
-    local http_port=$(networksetup -getwebproxy "$wifi_name" 2>/dev/null | awk '/Port:/ {print $2}')
-    local socks_port=$(networksetup -getsocksfirewallproxy "$wifi_name" 2>/dev/null | awk '/Port:/ {print $2}')
-    
-    if [ -z "$http_port" ] || [ "$http_port" = "0" ]; then
-        echo "❌ 未检测到系统代理端口，请确认 Loon 的'系统代理'已开启"
-        return
-    fi
 
-    export http_proxy="http://127.0.0.1:$http_port"
-    export https_proxy="http://127.0.0.1:$http_port"
-    export all_proxy="socks5://127.0.0.1:$socks_port"
-    
-    echo "✅ 终端代理已开启 (HTTP:$http_port / SOCKS:$socks_port)"
-}
+    case "$action" in
+        on)
+            local http_port=$(networksetup -getwebproxy "$wifi_name" 2>/dev/null | awk '/Port:/ {print $2}')
+            local socks_port=$(networksetup -getsocksfirewallproxy "$wifi_name" 2>/dev/null | awk '/Port:/ {print $2}')
 
-unproxy() {
-    unset http_proxy https_proxy all_proxy
-    echo "⭕️ 终端代理已关闭"
+            if [ -z "$http_port" ] || [ "$http_port" = "0" ]; then
+                echo "❌ 未检测到系统代理端口，请确认代理软件的'系统代理'已开启"
+                return 1
+            fi
+
+            export http_proxy="http://127.0.0.1:$http_port"
+            export https_proxy="http://127.0.0.1:$http_port"
+            export all_proxy="socks5://127.0.0.1:$socks_port"
+
+            echo "✅ 终端代理已开启 (HTTP:$http_port / SOCKS:$socks_port)"
+            ;;
+        off)
+            unset http_proxy https_proxy all_proxy
+            echo "⭕️ 终端代理已关闭"
+            ;;
+        status)
+            if [ -n "$http_proxy" ] || [ -n "$all_proxy" ]; then
+                echo "🟢 终端代理当前状态: 已开启"
+                echo "   http_proxy  = ${http_proxy:-未设置}"
+                echo "   https_proxy = ${https_proxy:-未设置}"
+                echo "   all_proxy   = ${all_proxy:-未设置}"
+            else
+                echo "⚪️ 终端代理当前状态: 未开启"
+            fi
+            ;;
+        *)
+            echo "用法: tproxy [on|off|status]"
+            return 1
+            ;;
+    esac
 }
 
 # 终端打开时自动检查：如果 Loon 系统代理已开启，则自动为当前终端注入代理
 if networksetup -getwebproxy Wi-Fi 2>/dev/null | grep -q "Enabled: Yes"; then
-    proxy > /dev/null
+    tproxy on > /dev/null
 fi
 
 # ==========================================
-# 4. 常用别名 (Alias)
-# ==========================================
-alias weixing='open -n /Applications/WeChat.app'
-
-# ==========================================
-# 5. 提示符与运行时激活
+# 4. 提示符与运行时激活
 # ==========================================
 export PATH="$HOME/.local/bin:$PATH"
 

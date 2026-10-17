@@ -56,11 +56,11 @@
 
 ### 4. 官方原版微信 + 防撤回多开插件
 - 自动安装腾讯官网发布的 Universal 架构微信原版（绝非受沙箱限制的 MAS 版本）。
-- 自动从官方源下载最新版 [**X1a0HeWeChatPlugin**](https://github.com/X1a0He/X1a0HeWeChatPlugin) 插件并完成系统级静默注入，同时提供 `weixing` 多开命令行别名。
+- 自动从官方源下载最新版 [**X1a0HeWeChatPlugin**](https://github.com/X1a0He/X1a0HeWeChatPlugin) 插件并完成系统级静默注入。
 
 ### 5. 动态无感代理探测 (Loon / Clash)
 - 无需硬编码代理端口。终端启动时自动通过 `networksetup` 探测当前 Wi-Fi 代理状态，动态提取端口并注入环境变量。
-- 支持 `proxy`（开启终端代理）与 `unproxy`（关闭代理）快捷命令。
+- 支持 `tproxy on`（开启代理）、`tproxy off`（关闭代理）与 `tproxy status`（查看当前代理状态）快捷命令。
 
 ### 6. 1Password SSH Agent 远端隧道守护
 - 配置 LaunchAgent 开机守护进程（`com.zhang.mac-1password-agent-tunnel.plist`）。
