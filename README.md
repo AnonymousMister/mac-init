@@ -34,7 +34,7 @@
   [6] 同步 1Password SSH 规则 (~/.ssh/config 全局认证与 443 穿透)
   [7] 配置动态终端代理 (tproxy 自动探测与快捷命令)
   [8] 恢复 mise 运行时 (自动安装并激活 Go, Node, pnpm)
-  [9] 安装微信与插件生态 (官网 Universal 微信 + X1a0He 插件 + 微信输入法)
+  [9] 安装微信与插件 (官网 Universal 版 + X1a0He 插件 + 防损坏修复)
   [10] 配置 1Password 隧道 (远端 SSH Socket 隧道守护自启)
   [11] 软件环境装配体检 (Environment Doctor: 检查所有软件后续环境注入并自动补齐)
   ---------------------------------------------------
@@ -94,8 +94,8 @@
 ### 桌面 GUI 软件 (Cask)
 - **开发与运维**：`orbstack`、`jetbrains-gateway`、`apifox`、`termius`、`remote-desktop-manager`、`codebuddy-cn`、`workbuddy-cn`、`font-jetbrains-mono-nerd-font`
 - **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`libreoffice`、`keka`、`xiaoheiribao` (小黑日报)
-- **网络、云盘与系统工具**：`1password`、`google-chrome`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`logi-options-plus-mini` (罗技驱动精简版)
-> *注：微信官方 Universal 版、X1a0He 防撤回插件及微信输入法均由【模块 08 / 菜单 9】独立管理（避免 Brewfile 覆盖重签补丁并保证一站式生态装配）。*
+- **网络、云盘与系统工具**：`1password`、`google-chrome`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-input` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`logi-options-plus-mini` (罗技驱动精简版)
+> *注：微信官方 Universal 版及 X1a0He 防撤回插件由【模块 08 / 菜单 9】独立管理（避免 Brewfile 覆盖重签补丁）。*
 
 ### Mac App Store 应用 (mas 共 18 款)
 - **通信与协作**：`钉钉`、`QQ`、`Telegram`、`腾讯会议`

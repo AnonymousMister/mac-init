@@ -12,7 +12,7 @@ ensure_macos
 activate_brew
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [模块 08] 安装微信与插件生态 (官网 Universal 微信 + X1a0He 插件 + 微信输入法)${NC}"
+echo -e "${BLUE}>> [模块 08] 安装微信与插件 (官网 Universal 版 + X1a0He 插件 + 防损坏修复)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 # 1. 确保微信存在且为官方原版 Universal
@@ -55,19 +55,4 @@ echo -e "${YELLOW}>> 正在修复微信应用签名与权限 (清除隔离属性
 sudo xattr -rd com.apple.quarantine /Applications/WeChat.app 2>/dev/null || true
 sudo codesign --force --deep --sign - /Applications/WeChat.app 2>/dev/null || true
 
-echo -e "${GREEN}✓ 微信 X1a0He 插件安装与签名修复成功！重新打开微信即可体验防撤回与多开功能。${NC}"
-
-# 6. 安装微信输入法 (WeChat Input / WeType)
-echo -e "\n${YELLOW}>> [步骤] 检查并安装微信输入法 (WeType)...${NC}"
-if [ ! -d "/Library/Input Methods/WeType.app" ] && [ ! -d "$HOME/Library/Input Methods/WeType.app" ]; then
-  BREW_BIN="$(detect_brew_bin)"
-  if [ -n "$BREW_BIN" ]; then
-    echo -e "${YELLOW}正在通过个人 tap 安装官方微信输入法...${NC}"
-    "$BREW_BIN" install --cask anonymousmister/tap/wechat-input || true
-    echo -e "${GREEN}✓ 微信输入法安装完成！${NC}"
-  fi
-else
-  echo -e "${GREEN}✓ 微信输入法已就绪。${NC}"
-fi
-
-echo -e "\n${GREEN}✓ 微信、防撤回插件及微信输入法全套部署完毕！${NC}"
+echo -e "\n${GREEN}✓ 微信 X1a0He 插件安装与签名修复成功！重新打开微信即可体验防撤回与多开功能。${NC}"
