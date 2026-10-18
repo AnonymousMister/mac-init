@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# 模块 06: 微信官方 Universal 版与 X1a0He 防撤回多开插件安装与修复
+# 模块 08: 微信官方 Universal 版与 X1a0He 防撤回多开插件安装与修复
 # ==============================================================================
 
 set -e
@@ -15,16 +15,58 @@ echo -e "\n${BLUE}====================================================${NC}"
 echo -e "${BLUE}>> [模块 08] 安装微信与插件 (官网 Universal 版 + X1a0He 插件 + 防损坏修复)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
+# 从腾讯官网直链自动下载并挂载安装 Universal 原版微信
+install_wechat_via_script() {
+  echo -e "${YELLOW}>> 正在解析微信官网最新 Universal DMG 下载地址...${NC}"
+  local dmg_url
+  dmg_url="$(curl -sL https://mac.weixin.qq.com/ 2>/dev/null | grep -o 'https://[^"]*WeChatMac[^"]*\.dmg' | head -n 1)"
+  if [ -z "$dmg_url" ]; then
+    dmg_url="https://dldir1v6.qq.com/weixin/Universal/Mac/WeChatMac_4.1.15.dmg"
+  fi
+
+  local dmg_path="/tmp/WeChatMac.dmg"
+  echo -e "${YELLOW}正在从腾讯官网直接下载微信安装镜像: $dmg_url ...${NC}"
+  if ! curl -fSL --progress-bar --connect-timeout 15 -o "$dmg_path" "$dmg_url"; then
+    echo -e "${RED}[错误] 微信安装镜像下载失败，请检查网络连接。${NC}"
+    return 1
+  fi
+
+  echo -e "${YELLOW}>> 正在挂载 DMG 镜像并安装到 /Applications/...${NC}"
+  local mount_dir
+  mount_dir="$(hdiutil attach "$dmg_path" -nobrowse -readonly 2>/dev/null | grep -o '/Volumes/.*' | head -n 1)"
+  
+  if [ -z "$mount_dir" ] || [ ! -d "$mount_dir/WeChat.app" ]; then
+    echo -e "${RED}[错误] 镜像挂载失败或未在镜像内找到 WeChat.app${NC}"
+    [ -n "$mount_dir" ] && hdiutil detach "$mount_dir" -force 2>/dev/null || true
+    rm -f "$dmg_path"
+    return 1
+  fi
+
+  sudo rm -rf /Applications/WeChat.app 2>/dev/null || true
+  sudo cp -R "$mount_dir/WeChat.app" /Applications/
+  
+  echo -e "${YELLOW}>> 卸载挂载点并清理临时安装包...${NC}"
+  hdiutil detach "$mount_dir" -force 2>/dev/null || true
+  rm -f "$dmg_path"
+  
+  echo -e "${GREEN}✓ 官网原版微信已通过脚本成功安装到 /Applications/WeChat.app！${NC}"
+}
+
 # 1. 确保微信存在且为官方原版 Universal
 if [ ! -d "/Applications/WeChat.app" ]; then
   BREW_BIN="$(detect_brew_bin)"
   if [ -n "$BREW_BIN" ]; then
-    echo -e "${YELLOW}未检测到 /Applications/WeChat.app，正在通过 Homebrew 安装官网原版微信...${NC}"
-    "$BREW_BIN" install --cask wechat
+    echo -e "${YELLOW}检测到系统已安装 Homebrew，优先尝试通过 Homebrew 安装原版微信...${NC}"
+    if ! "$BREW_BIN" install --cask wechat; then
+      echo -e "${YELLOW}Homebrew 安装遇到异常，自动无缝降级为官网直链脚本自动化安装...${NC}"
+      install_wechat_via_script
+    fi
   else
-    echo -e "${RED}[错误] 未检测到 Homebrew，请先安装 Homebrew 或手动安装官网微信。${NC}"
-    exit 1
+    echo -e "${YELLOW}未检测到 Homebrew 环境，自动通过腾讯官网直链脚本自动化安装微信...${NC}"
+    install_wechat_via_script
   fi
+else
+  echo -e "${GREEN}✓ 检测到 /Applications/WeChat.app 已存在，跳过客户端下载。${NC}"
 fi
 
 # 2. 彻底退出微信

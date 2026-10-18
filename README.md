@@ -73,8 +73,9 @@
 - 统一由 Rust 编写的高性能工具 **[`mise`](https://github.com/jdx/mise)** 接管，自动安装并全局激活最新稳定版 **Go**、**Node.js** 与 **pnpm**。
 
 ### 7. 官方原版微信 + 防撤回多开插件
-- 自动安装腾讯官网发布的 Universal 架构微信原版（绝非受沙箱限制的 MAS 版本）。
+- **智能安装策略**：自动检测环境，有 Homebrew 优先通过 `brew install --cask wechat` 安装；未安装 Homebrew 或安装失败时，自动解析腾讯官网最新 Universal DMG 直链通过脚本下载并挂载安装，做到零外部依赖。
 - 自动从官方源下载最新版 [**X1a0HeWeChatPlugin**](https://github.com/X1a0He/X1a0HeWeChatPlugin) 插件并完成系统级静默注入。
+- 自动清除 Gatekeeper 隔离属性并执行深度代码自签名，彻底避免“应用已损坏”拦截。
 
 ### 8. 动态无感代理探测 (Loon / Clash)
 - 无需硬编码代理端口。终端启动时自动通过 `networksetup` 探测当前 Wi-Fi 代理状态，动态提取端口并注入环境变量。
