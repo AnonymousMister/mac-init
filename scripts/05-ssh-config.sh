@@ -12,7 +12,7 @@ PROJECT_ROOT="$(get_project_root)"
 ensure_macos
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> 配置 1Password SSH Agent 与 GitHub 443 穿透规则${NC}"
+echo -e "${BLUE}>> [模块 05] 同步 1Password SSH 规则 (~/.ssh/config 全局认证与 443 穿透)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 SSH_DIR="$HOME/.ssh"

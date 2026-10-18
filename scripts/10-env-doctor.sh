@@ -14,7 +14,7 @@ ensure_macos
 activate_brew
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 8] 软件环境变量与后置配置自检装配 (Environment Doctor)${NC}"
+echo -e "${BLUE}>> [模块 10] 软件环境装配体检 (Environment Doctor: 检查所有软件后续环境注入并自动补齐)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 ZPROFILE="$HOME/.zprofile"

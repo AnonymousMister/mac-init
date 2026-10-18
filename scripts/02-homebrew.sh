@@ -12,7 +12,7 @@ source "$SCRIPT_DIR/common.sh"
 ensure_macos
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 2] 安装与配置 Homebrew (含环境变量自动注入)${NC}"
+echo -e "${BLUE}>> [模块 02] 安装与配置 Homebrew (含环境变量自动注入)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 BREW_BIN="$(detect_brew_bin)"

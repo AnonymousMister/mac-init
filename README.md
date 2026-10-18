@@ -92,15 +92,16 @@
 `mise` (运行时管理)、`uv` (Python极速包管理)、`starship` (终端提示符，预置定制 Gruvbox 主题配置)、`mas` (Mac App Store命令行)、`rtk`、`smartmontools`、`telnet`、`goreleaser`
 
 ### 桌面 GUI 软件 (Cask)
-- **开发与运维**：`orbstack`、`jetbrains-toolbox`、`apifox`、`termius`、`remote-desktop-manager`、`codebuddy-cn`、`font-jetbrains-mono-nerd-font`
+- **开发与运维**：`orbstack`、`jetbrains-gateway`、`apifox`、`termius`、`remote-desktop-manager`、`codebuddy-cn`、`workbuddy-cn`、`font-jetbrains-mono-nerd-font`
 - **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`libreoffice`、`keka`、`xiaoheiribao` (小黑日报)
-- **网络、云盘与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-universal`、`x1a0he-wechat-plugin`、`wechat-input` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`
+- **网络、云盘与系统工具**：`1password`、`google-chrome`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-input` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`logi-options-plus-mini` (罗技驱动精简版)
+> *注：微信原版及 X1a0He 防撤回插件由【模块 08】独立管理（避免覆盖重签补丁）。*
 
-### Mac App Store 应用 (mas 共 24 款)
-- **通信与协作**：`钉钉`、`飞书`、`QQ`、`Telegram`、`腾讯会议`
+### Mac App Store 应用 (mas 共 18 款)
+- **通信与协作**：`钉钉`、`QQ`、`Telegram`、`腾讯会议`
 - **核心开发与网络**：`nblink` (1Password 隧道强依赖)、`CotEditor`、`TestFlight`、`Windows App`
-- **办公与扩展**：`Microsoft Office 套件` (Word / Excel / PowerPoint / OneDrive)、`WPS Office`、`1Password for Safari`、`沉浸式翻译`、`PastePal`、`Amphetamine`、`Barbee`、`Save to Raindrop.io`
-- **影音娱乐**：`网易云音乐`、`腾讯视频`、`网易爆米花`、`淘宝桌面版`
+- **办公与扩展**：`Microsoft Office 套件` (Word / Excel / PowerPoint / OneDrive)、`WPS Office`、`1Password for Safari`、`沉浸式翻译`、`PastePal`、`Amphetamine`、`Barbee`
+- **影音生活**：`网易云音乐`、`网易爆米花`、`淘宝桌面版`
 
 ---
 
@@ -119,7 +120,7 @@
 如果您后续对软件清单或配置文件进行了修改，可在本地目录直接推送到 GitHub：
 
 ```bash
-cd /Users/zhang/Documents/日常/mac-init
+cd ~/Documents/mac恢复/mac-init
 git add .
 git commit -m "feat: 更新配置清单"
 git push origin main

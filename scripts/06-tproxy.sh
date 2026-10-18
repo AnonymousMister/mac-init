@@ -13,7 +13,7 @@ PROJECT_ROOT="$(get_project_root)"
 ensure_macos
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> 配置动态终端网络代理管理 (tproxy)${NC}"
+echo -e "${BLUE}>> [模块 06] 配置动态终端代理 (tproxy 自动探测与快捷命令)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 TPROXY_CONF="$PROJECT_ROOT/configs/tproxy.zsh"

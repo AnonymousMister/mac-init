@@ -12,7 +12,7 @@ PROJECT_ROOT="$(get_project_root)"
 ensure_macos
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 3] 配置 Shell 环境、XDG 规范目录与 SSH${NC}"
+echo -e "${BLUE}>> [模块 03] 配置 Shell 与规范目录 (XDG 规范、AI模型目录、Starship 提示符)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 # 1. 目录规划与 XDG 规范

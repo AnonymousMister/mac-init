@@ -11,7 +11,7 @@ source "$SCRIPT_DIR/common.sh"
 ensure_macos
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 1] 检查与安装 Xcode Command Line Tools${NC}"
+echo -e "${BLUE}>> [模块 01] 检查与安装 Xcode Command Line Tools${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 if ! xcode-select -p >/dev/null 2>&1; then

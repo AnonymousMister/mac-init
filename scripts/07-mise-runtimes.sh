@@ -13,7 +13,7 @@ ensure_macos
 activate_brew
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 5] 恢复 mise 多语言开发运行时 (Go, Node, pnpm)${NC}"
+echo -e "${BLUE}>> [模块 07] 恢复 mise 运行时 (自动安装并激活 Go, Node, pnpm)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 if ! command -v mise >/dev/null 2>&1; then

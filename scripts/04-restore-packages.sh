@@ -13,7 +13,7 @@ ensure_macos
 activate_brew
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 4] 批量安装已备份的软件包与 App (Brewfile)${NC}"
+echo -e "${BLUE}>> [模块 04] 批量恢复软件 (Brewfile: Formula + Cask + mas + 字体系统级注册)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 BREW_BIN="$(detect_brew_bin)"

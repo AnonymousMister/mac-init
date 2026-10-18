@@ -12,7 +12,7 @@ PROJECT_ROOT="$(get_project_root)"
 ensure_macos
 
 echo -e "\n${BLUE}====================================================${NC}"
-echo -e "${BLUE}>> [步骤 7] 配置 1Password SSH Agent 远端隧道守护服务${NC}"
+echo -e "${BLUE}>> [模块 09] 配置 1Password 隧道 (远端 SSH Socket 隧道守护自启)${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 TUNNEL_DIR="$HOME/Library/Application Support/Mac1PasswordAgentTunnel"
