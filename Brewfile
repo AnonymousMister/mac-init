@@ -43,7 +43,6 @@ cask "tencent-lemon"
 cask "termius"
 cask "xiaoheiribao"
 # cask "loon"             # 官方取消 GitHub DMG 直链，仅在 Telegram 社区/内测群分发
-cask "wechat-input"
 cask "codebuddy-cn"
 cask "workbuddy-cn"
 cask "123pan"

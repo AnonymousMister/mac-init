@@ -76,7 +76,7 @@ main_menu() {
     echo -e "  ${CYAN}[6] 同步 1Password SSH 规则${NC} (~/.ssh/config 全局认证与 443 穿透)"
     echo -e "  ${CYAN}[7] 配置动态终端代理${NC} (tproxy 自动探测与快捷命令)"
     echo -e "  ${CYAN}[8] 恢复 mise 运行时${NC} (自动安装并激活 Go, Node, pnpm)"
-    echo -e "  ${CYAN}[9] 安装微信与插件${NC} (官网 Universal 版 + X1a0He 插件 + 防损坏修复)"
+    echo -e "  ${CYAN}[9] 安装微信与插件生态${NC} (官网 Universal 微信 + X1a0He 插件 + 微信输入法)"
     echo -e "  ${CYAN}[10] 配置 1Password 隧道${NC} (远端 SSH Socket 隧道守护自启)"
     echo -e "  ${CYAN}[11] 软件环境装配体检${NC} (Environment Doctor: 检查所有软件后续环境注入并自动补齐)"
     echo -e "  ---------------------------------------------------"
