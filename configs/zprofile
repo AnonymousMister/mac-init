@@ -1,4 +1,10 @@
 # ==========================================
 # macOS 登录环境配置 (~/.zprofile)
-# 核心环境与 PATH 已收拢至 ~/.zshrc 统一管理，确保所有子终端与 IDE 环境绝对一致
 # ==========================================
+
+# 1. 确保 Homebrew 登录 Shell 环境变量优先加载
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv zsh)"
+fi

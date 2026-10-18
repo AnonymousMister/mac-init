@@ -25,15 +25,17 @@
 =====================================================
          🍎 macOS 极简系统初始化与环境恢复工具       
 =====================================================
-  [1] 全套一键恢复 (依次执行 2+3+4+5+6 全部项)
+  [1] 全套一键恢复 (依次执行 2~8 所有步骤)
   ---------------------------------------------------
-  [2] 基础开发环境 (Command Line Tools + Brew + XDG/AI规范)
-  [3] 批量恢复软件 (Brew 命令行工具、GUI 软件及 App Store)
-  [4] 恢复 mise 运行时 (自动安装并激活 Go, Node, pnpm)
-  [5] 安装微信与插件 (官网 Universal 版微信 + X1a0He 插件)
-  [6] 配置 1Password 隧道 (远端 SSH Socket 隧道守护自启)
+  [2] 检查/安装 Command Line Tools (Xcode 命令行开发工具)
+  [3] 安装与配置 Homebrew (自动安装 + 环境变量注入 ~/.zprofile)
+  [4] 配置 Shell 与规范目录 (XDG、AI模型目录、Starship、代理、SSH)
+  [5] 批量恢复软件 (Brewfile: Formula + Cask + mas)
+  [6] 恢复 mise 运行时 (自动安装并激活 Go, Node, pnpm)
+  [7] 安装微信与插件 (官网 Universal 版 + X1a0He 插件 + 防损坏修复)
+  [8] 配置 1Password 隧道 (远端 SSH Socket 隧道守护自启)
   ---------------------------------------------------
-  [7] 清理临时缓存并退出
+  [9] 清理临时缓存并退出
   [0] 退出脚本
 =====================================================
 ```
@@ -42,27 +44,35 @@
 
 ## 🛡️ 核心亮点设计
 
-### 1. 增量与幂等性配置管理（零覆盖风险）
+### 1. 细粒度脚本解耦与独立执行
+- **模块职责高度单一**：彻底摒弃单体庞大脚本，在 `scripts/` 下将每个环节拆分为独立脚本（`01-xcode-clt.sh`、`02-homebrew.sh`、`03-shell-env.sh` 等）。
+- **随心单独运行**：既可通过主菜单调度，也可直接单独执行某个子脚本（例如只安装配置 Homebrew：`bash scripts/02-homebrew.sh`）。
+
+### 2. Homebrew 官方 "Next steps" 全自动配置（免手动复制命令）
+- **告别手动复制**：全新安装 Homebrew 后，官方提示的添加 PATH 步骤（写入 `~/.zprofile` 与 `eval "$(/opt/homebrew/bin/brew shellenv zsh)"`）由脚本**全自动幂等完成**。
+- **即时激活生效**：无需重新打开终端或手动执行命令，安装完毕即刻生效，环境变量无缝就绪。
+
+### 3. 增量与幂等性配置管理（零覆盖风险）
 - **绝不覆盖用户原有配置**：对 `~/.zprofile`、`~/.zshrc`、`~/.ssh/config` 采用特征标记块（`# >>> mac-init >>>`）注入机制。
 - **可重复执行（幂等性）**：多次运行仅更新标记块内部，绝不生成冗余的 `.bak` 残留文件，对用户原有的 PATH、别名及第三方工具配置做到真正的零破坏。
 
-### 2. 彻底根治 AI 工具对 Home 目录的污染
+### 4. 彻底根治 AI 工具对 Home 目录的污染
 - **痛点**：Hugging Face、PyTorch、Ollama、uv 等工具动辄在 `~` 目录下创建 `~/.cache`、`~/.huggingface` 等隐藏文件夹，塞满数 GB 的模型权重与缓存。
 - **解决方案**：全局部署 **XDG 基础目录规范**，并将所有大模型权重集中重定向至 `~/Developer/AI_Models`，方便集中监控、迁移或一键清理。
 
-### 3. 现代多语言版本管理 (`mise`)
+### 5. 现代多语言版本管理 (`mise`)
 - 彻底淘汰容易在 Home 目录下留下碎目录的旧工具（如 `nvm`、`sdkman`、`pyenv`）。
 - 统一由 Rust 编写的高性能工具 **[`mise`](https://github.com/jdx/mise)** 接管，自动安装并全局激活最新稳定版 **Go**、**Node.js** 与 **pnpm**。
 
-### 4. 官方原版微信 + 防撤回多开插件
+### 6. 官方原版微信 + 防撤回多开插件
 - 自动安装腾讯官网发布的 Universal 架构微信原版（绝非受沙箱限制的 MAS 版本）。
 - 自动从官方源下载最新版 [**X1a0HeWeChatPlugin**](https://github.com/X1a0He/X1a0HeWeChatPlugin) 插件并完成系统级静默注入。
 
-### 5. 动态无感代理探测 (Loon / Clash)
+### 7. 动态无感代理探测 (Loon / Clash)
 - 无需硬编码代理端口。终端启动时自动通过 `networksetup` 探测当前 Wi-Fi 代理状态，动态提取端口并注入环境变量。
 - 支持 `tproxy on`（开启代理）、`tproxy off`（关闭代理）与 `tproxy status`（查看当前代理状态）快捷命令。
 
-### 6. 1Password SSH Agent 远端隧道守护
+### 8. 1Password SSH Agent 远端隧道守护
 - 配置 LaunchAgent 开机守护进程（`com.zhang.mac-1password-agent-tunnel.plist`）。
 - 开机自启保活，将本地 1Password SSH Agent Socket 反向代理到远程开发机，支持断线自动检测重连与 NodeLink 进程状态监控。
 
@@ -76,7 +86,7 @@
 ### 桌面 GUI 软件 (Cask)
 - **开发与运维**：`orbstack`、`jetbrains-toolbox`、`apifox`、`termius`、`remote-desktop-manager`、`codebuddy-cn`、`font-jetbrains-mono-nerd-font`
 - **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`libreoffice`、`keka`、`xiaoheiribao` (小黑日报)
-- **网络、云盘与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-universal`、`x1a0he-wechat-plugin`、`wechat-input` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`loon`
+- **网络、云盘与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-universal`、`x1a0he-wechat-plugin`、`wechat-input` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`
 
 ### Mac App Store 应用 (mas 共 24 款)
 - **通信与协作**：`钉钉`、`飞书`、`QQ`、`Telegram`、`腾讯会议`
