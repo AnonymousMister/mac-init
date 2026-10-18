@@ -37,7 +37,6 @@ fi
 
 # 信任个人 tap
 brew trust anonymousmister/tap 2>/dev/null || true
-brew trust --cask anonymousmister/tap/x1a0he-wechat-plugin 2>/dev/null || true
 
 echo -e "${YELLOW}>> 正在安装软件包，请稍候...${NC}"
 brew bundle --file="$BREWFILE" || {

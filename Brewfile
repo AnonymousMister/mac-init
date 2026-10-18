@@ -42,8 +42,6 @@ cask "switchhosts"
 cask "tailscale-app"
 cask "tencent-lemon"
 cask "termius"
-cask "wechat-universal"
-cask "x1a0he-wechat-plugin"
 cask "xiaoheiribao"
 # cask "loon"             # 官方取消 GitHub DMG 直链，仅在 Telegram 社区/内测群分发
 cask "wechat-input"
