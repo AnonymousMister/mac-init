@@ -256,6 +256,11 @@ install_wechat_plugin() {
   sudo installer -pkg "$PLUGIN_PKG" -target /
   rm -f "$PLUGIN_PKG"
 
+  # 5. 修复注入插件后的 Gatekeeper 隔离拦截与失效签名
+  echo -e "${YELLOW}>> 正在修复微信应用签名与权限 (解决'已损坏'拦截)...${NC}"
+  sudo xattr -rd com.apple.quarantine /Applications/WeChat.app 2>/dev/null || true
+  sudo codesign --force --deep --sign - /Applications/WeChat.app 2>/dev/null || true
+
   echo -e "${GREEN}✓ 微信 X1a0He 插件安装成功！重新打开微信即可体验防撤回与多开功能。${NC}"
 }
 
