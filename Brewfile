@@ -5,11 +5,6 @@
 # 1. 第三方 Tap 源
 tap "farion1231/ccswitch", trusted: true
 tap "goreleaser/tap", trusted: true
-tap "jjyr/tap", trusted: true
-tap "nguyenphutrong/tap", trusted: true
-tap "sentient-os-labs/tap", trusted: { casks: ["sentient-os"] }
-tap "sunnyyoung/tap", trusted: true
-tap "wxtsky/tap", trusted: true
 tap "pangmo5/tap", trusted: true
 tap "AnonymousMister/tap", trusted: true
 
@@ -50,12 +45,12 @@ cask "termius"
 cask "wechat-universal"
 cask "x1a0he-wechat-plugin"
 cask "xiaoheiribao"
-cask "loon"
+# cask "loon"             # 官方取消 GitHub DMG 直链，仅在 Telegram 社区/内测群分发
 cask "wetype"
 cask "codebuddy-cn"
 cask "workbuddy-cn"
 cask "123pan"
-cask "feiniu-sync"
+# cask "feiniu-sync"      # 官网启用防盗链动态签名，已通过系统工具完成手动安装
 cask "swiftycrow"
 cask "logi-options-plus-mini"
 
@@ -68,7 +63,6 @@ mas "Microsoft Excel", id: 462058435
 mas "Microsoft PowerPoint", id: 462062816
 mas "Microsoft Word", id: 462054704
 mas "nblink", id: 1632648733
-mas "Notion Web Clipper", id: 1559269364
 mas "OneDrive", id: 823766827
 mas "PastePal", id: 1503446680
 mas "QQ", id: 451108668
