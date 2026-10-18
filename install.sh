@@ -67,21 +67,22 @@ main_menu() {
     echo -e "\n${BLUE}=====================================================${NC}"
     echo -e "${BLUE}         🍎 macOS 极简系统初始化与环境恢复工具       ${NC}"
     echo -e "${BLUE}=====================================================${NC}"
-    echo -e "  ${GREEN}[1] 全套一键恢复${NC} (依次执行 2~8 所有步骤)"
+    echo -e "  ${GREEN}[1] 全套一键恢复${NC} (依次执行 2~9 所有步骤)"
     echo -e "  ---------------------------------------------------"
-    echo -e "  ${CYAN}[2] 检查/安装 Command Line Tools${NC} (Xcode 命令行工具)"
+    echo -e "  ${CYAN}[2] 检查/安装 Command Line Tools${NC} (Xcode 命令行开发工具)"
     echo -e "  ${CYAN}[3] 安装与配置 Homebrew${NC} (自动安装 + 环境变量注入 ~/.zprofile)"
     echo -e "  ${CYAN}[4] 配置 Shell 与规范目录${NC} (XDG、AI模型目录、Starship、代理、SSH)"
-    echo -e "  ${CYAN}[5] 批量恢复软件${NC} (Brewfile: Formula + Cask + mas)"
+    echo -e "  ${CYAN}[5] 批量恢复软件${NC} (Brewfile: Formula + Cask + mas + 字体自动注册)"
     echo -e "  ${CYAN}[6] 恢复 mise 运行时${NC} (自动安装并激活 Go, Node, pnpm)"
     echo -e "  ${CYAN}[7] 安装微信与插件${NC} (官网 Universal 版 + X1a0He 插件 + 防损坏修复)"
     echo -e "  ${CYAN}[8] 配置 1Password 隧道${NC} (远端 SSH Socket 隧道守护自启)"
+    echo -e "  ${CYAN}[9] 软件环境装配体检${NC} (Environment Doctor: 检查所有软件后续环境注入并自动补齐)"
     echo -e "  ---------------------------------------------------"
-    echo -e "  ${YELLOW}[9] 清理临时缓存并退出${NC}"
+    echo -e "  ${YELLOW}[10] 清理临时缓存并退出${NC}"
     echo -e "  ${RED}[0] 退出脚本${NC}"
     echo -e "${BLUE}=====================================================${NC}"
     
-    read_input "请输入操作编号 [0-9]: " choice
+    read_input "请输入操作编号 [0-10]: " choice
 
     case "$choice" in
       1)
@@ -92,7 +93,8 @@ main_menu() {
         "$SCRIPT_DIR/scripts/05-mise-runtimes.sh"
         "$SCRIPT_DIR/scripts/06-wechat-plugin.sh"
         "$SCRIPT_DIR/scripts/07-1password-tunnel.sh"
-        echo -e "\n${GREEN}🎉 全套恢复工作已顺利完成！${NC}"
+        "$SCRIPT_DIR/scripts/08-env-doctor.sh"
+        echo -e "\n${GREEN}🎉 全套恢复与环境装配工作已顺利完成！${NC}"
         cleanup_workspace
         break
         ;;
@@ -118,6 +120,9 @@ main_menu() {
         "$SCRIPT_DIR/scripts/07-1password-tunnel.sh"
         ;;
       9)
+        "$SCRIPT_DIR/scripts/08-env-doctor.sh"
+        ;;
+      10)
         cleanup_workspace
         echo -e "${GREEN}已清理，退出程序。${NC}"
         break
@@ -128,7 +133,7 @@ main_menu() {
         break
         ;;
       *)
-        echo -e "${RED}输入有误，请输入 0 到 9 之间的数字。${NC}"
+        echo -e "${RED}输入有误，请输入 0 到 10 之间的数字。${NC}"
         ;;
     esac
   done

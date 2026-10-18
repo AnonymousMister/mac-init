@@ -20,7 +20,6 @@ brew "uv"
 
 # 3. Cask 桌面应用与字体
 cask "1password"
-cask "adguard"
 cask "aldente"
 cask "apifox"
 cask "cc-switch"
@@ -30,7 +29,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "google-gemini"
 cask "homebrew-app"
-cask "jetbrains-toolbox"
+cask "jetbrains-gateway"
 cask "keka"
 cask "libreoffice"
 cask "mountain-duck"
@@ -64,16 +63,13 @@ mas "nblink", id: 1632648733
 mas "OneDrive", id: 823766827
 mas "PastePal", id: 1503446680
 mas "QQ", id: 451108668
-mas "Save to Raindrop.io", id: 1549370672
 mas "Telegram", id: 747648890
 mas "TestFlight", id: 899247664
 mas "Windows App", id: 1295203466
 mas "WPS Office", id: 1443749478
 mas "沉浸式翻译", id: 6447957425
 mas "钉钉", id: 1435447041
-mas "飞书", id: 1551632588
 mas "淘宝桌面版", id: 6747376970
 mas "腾讯会议", id: 1484048379
-mas "腾讯视频", id: 1231336508
 mas "网易爆米花", id: 6553989480
 mas "网易云音乐", id: 944848654
