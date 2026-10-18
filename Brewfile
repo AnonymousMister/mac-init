@@ -6,7 +6,7 @@
 tap "farion1231/ccswitch", trusted: true
 tap "goreleaser/tap", trusted: true
 tap "pangmo5/tap", trusted: true
-tap "AnonymousMister/tap", trusted: true
+tap "anonymousmister/tap", trusted: true
 
 # 2. Formula 命令行工具
 brew "goreleaser"

@@ -180,6 +180,7 @@ restore_packages() {
     fi
 
     brew trust anonymousmister/tap 2>/dev/null || true
+    brew trust --cask anonymousmister/tap/x1a0he-wechat-plugin 2>/dev/null || true
     echo -e "${YELLOW}正在安装软件包，请稍候...${NC}"
     brew bundle --file="$SCRIPT_DIR/Brewfile" || {
       echo -e "${YELLOW}部分软件安装可能失败或跳过，稍后可单独针对性排查。${NC}"
