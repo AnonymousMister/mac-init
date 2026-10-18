@@ -50,7 +50,7 @@ cask "wetype"
 cask "codebuddy-cn"
 cask "workbuddy-cn"
 cask "123pan"
-# cask "feiniu-sync"      # 官网启用防盗链动态签名，已通过系统工具完成手动安装
+cask "feiniu-sync"
 cask "swiftycrow"
 cask "logi-options-plus-mini"
 
