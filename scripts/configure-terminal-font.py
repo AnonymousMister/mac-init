@@ -11,7 +11,7 @@ import ctypes
 import ctypes.util
 
 def unquarantine_fonts():
-    """解除 macOS Gatekeeper 对字体的隔离属性"""
+    """解除 macOS Gatekeeper 隔离并同步至系统全局字体目录 /Library/Fonts"""
     font_pattern = os.path.expanduser("~/Library/Fonts/JetBrainsMono*")
     fonts = glob.glob(font_pattern)
     if not fonts:
@@ -20,6 +20,20 @@ def unquarantine_fonts():
 
     print(f">> 正在解除 {len(fonts)} 个字体文件的 Gatekeeper 隔离属性...")
     subprocess.run(["xattr", "-rd", "com.apple.quarantine"] + fonts, stderr=subprocess.DEVNULL)
+
+    # 尝试同步到系统全局字体目录 /Library/Fonts/（对整个系统所有 App 永久生效）
+    try:
+        sys_font_dir = "/Library/Fonts"
+        if os.access(sys_font_dir, os.W_OK):
+            print(">> 正在将字体注册至系统全局字体目录 /Library/Fonts/...")
+            subprocess.run(["cp", "-f"] + fonts + [sys_font_dir], stderr=subprocess.DEVNULL)
+            sys_fonts = glob.glob(os.path.join(sys_font_dir, "JetBrainsMono*"))
+            if sys_fonts:
+                subprocess.run(["xattr", "-rd", "com.apple.quarantine"] + sys_fonts, stderr=subprocess.DEVNULL)
+            print("✓ 字体已成功注册至系统全局字体库！")
+    except Exception as e:
+        print(f"[!] 同步系统字体目录时跳过: {e}")
+
     return True
 
 def register_fonts_coretext():
