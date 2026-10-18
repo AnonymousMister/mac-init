@@ -49,4 +49,9 @@ if [ -f "$PROJECT_ROOT/configs/ssh_config" ]; then
   echo -e "${GREEN}✓ SSH 配置已增量同步 (~/.ssh/config)。${NC}"
 fi
 
+# 5. 终端 Nerd Font 字体自动注入与隔离清除
+if [ -f "$PROJECT_ROOT/scripts/configure-terminal-font.py" ]; then
+  python3 "$PROJECT_ROOT/scripts/configure-terminal-font.py" || true
+fi
+
 echo -e "${GREEN}✓ Shell 与系统基础环境配置完毕！${NC}"
