@@ -149,12 +149,13 @@ if [ -d "/Applications/1Password.app" ]; then
   fi
 
   if grep -qs "IdentityAgent" "$SSH_CONFIG"; then
-    echo -e "  ${GREEN}✓ [已就绪] ~/.ssh/config 已配置 1Password 代理认证通道${NC}"
+    echo -e "  ${GREEN}✓ [已就绪] ~/.ssh/config 已配置 1Password 代理认证通道与穿透规则${NC}"
   else
-    if [ -f "$PROJECT_ROOT/configs/ssh_config" ]; then
-      inject_or_update_block "$SSH_CONFIG" "mac-init" "$PROJECT_ROOT/configs/ssh_config"
-      echo -e "  ${GREEN}✓ [已自动修复] 已增量同步 1Password SSH 穿透规则至 ~/.ssh/config${NC}"
+    if [ -x "$PROJECT_ROOT/scripts/05-ssh-config.sh" ]; then
+      echo -e "  ${YELLOW}⚠ [配置缺失] 正在调用独立模块增量同步 1Password SSH 穿透规则...${NC}"
+      "$PROJECT_ROOT/scripts/05-ssh-config.sh"
       FIX_COUNT=$((FIX_COUNT + 1))
+      echo -e "  ${GREEN}✓ [已自动修复] 已成功同步独立 SSH 穿透规则${NC}"
     fi
   fi
 else
@@ -162,25 +163,25 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-# 6. 检查 JetBrainsMono Nerd Font 字体全局注册与终端设置
+# ------------------------------------------------------------------------------
+# 6. 检查 JetBrainsMono Nerd Font 字体全局注册 (终端使用由用户自配)
 # ------------------------------------------------------------------------------
 CHECK_COUNT=$((CHECK_COUNT + 1))
-echo -e "\n${CYAN}[6/8] 检查 Nerd Font 字体系统级注册与终端配置...${NC}"
+echo -e "\n${CYAN}[6/8] 检查 Nerd Font 字体系统全局注册...${NC}"
 USER_FONTS="$(find "$HOME/Library/Fonts" -name "JetBrainsMono*.ttf" 2>/dev/null | wc -l | tr -d ' ')"
 SYS_FONTS="$(find "/Library/Fonts" -name "JetBrainsMono*.ttf" 2>/dev/null | wc -l | tr -d ' ')"
 
 if [ "$USER_FONTS" -gt 0 ] || [ "$SYS_FONTS" -gt 0 ]; then
-  # 检查是否已注册到系统全局 /Library/Fonts 并且隔离属性已清除
   QUARANTINE_COUNT="$(xattr -p com.apple.quarantine /Library/Fonts/JetBrainsMono*.ttf 2>/dev/null | wc -l | tr -d ' ')"
   
   if [ "$SYS_FONTS" -ge 40 ] && [ "$QUARANTINE_COUNT" -eq 0 ]; then
     echo -e "  ${GREEN}✓ [已就绪] Nerd Font 已注册至系统全局字体库 (/Library/Fonts/) 且无隔离拦截${NC}"
   else
     echo -e "  ${YELLOW}⚠ [配置缺失] 正在自动将字体同步到系统全局字体库并解除隔离...${NC}"
-    if [ -f "$PROJECT_ROOT/scripts/configure-terminal-font.py" ]; then
-      python3 "$PROJECT_ROOT/scripts/configure-terminal-font.py"
+    if [ -f "$PROJECT_ROOT/scripts/register-fonts.py" ]; then
+      python3 "$PROJECT_ROOT/scripts/register-fonts.py"
       FIX_COUNT=$((FIX_COUNT + 1))
-      echo -e "  ${GREEN}✓ [已自动修复] 字体已完成全系统注册与终端默认配置${NC}"
+      echo -e "  ${GREEN}✓ [已自动修复] 字体已完成系统级注册（终端字体可在设置中按需选择）${NC}"
     fi
   fi
 else
@@ -214,11 +215,11 @@ echo -e "\n${CYAN}[8/8] 检查动态终端代理控制函数 (tproxy)...${NC}"
 if grep -qs "tproxy()" "$ZSHRC"; then
   echo -e "  ${GREEN}✓ [已就绪] 动态终端代理函数 (tproxy) 已存在于 ~/.zshrc${NC}"
 else
-  echo -e "  ${YELLOW}⚠ [配置缺失] 正在注入 tproxy 动态代理函数到 ~/.zshrc...${NC}"
-  if [ -f "$PROJECT_ROOT/configs/zshrc" ]; then
-    inject_or_update_block "$ZSHRC" "mac-init" "$PROJECT_ROOT/configs/zshrc"
+  echo -e "  ${YELLOW}⚠ [配置缺失] 正在调用独立模块注入 tproxy 动态代理函数...${NC}"
+  if [ -x "$PROJECT_ROOT/scripts/06-tproxy.sh" ]; then
+    "$PROJECT_ROOT/scripts/06-tproxy.sh"
     FIX_COUNT=$((FIX_COUNT + 1))
-    echo -e "  ${GREEN}✓ [已自动修复] 已成功注入 tproxy 函数${NC}"
+    echo -e "  ${GREEN}✓ [已自动修复] 已成功注入独立 tproxy 模块${NC}"
   fi
 fi
 

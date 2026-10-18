@@ -43,10 +43,10 @@ brew bundle --file="$BREWFILE" || {
   echo -e "${YELLOW}部分软件安装可能失败或跳过，稍后可单独针对性排查。${NC}"
 }
 
-# 后置处理：若安装了 Nerd Font，自动解除隔离、注册至系统字体库并配置终端
-if [ -f "$PROJECT_ROOT/scripts/configure-terminal-font.py" ]; then
-  echo -e "${YELLOW}>> 正在自动注册 Nerd Font 到系统全局字体库并配置终端...${NC}"
-  python3 "$PROJECT_ROOT/scripts/configure-terminal-font.py" || true
+# 后置处理：若安装了 Nerd Font，自动解除隔离并注册至系统全局字体库 (/Library/Fonts)
+if [ -f "$PROJECT_ROOT/scripts/register-fonts.py" ]; then
+  echo -e "${YELLOW}>> 正在自动注册 Nerd Font 到系统全局字体库...${NC}"
+  python3 "$PROJECT_ROOT/scripts/register-fonts.py" || true
 fi
 
-echo -e "${GREEN}✓ 软件批量安装与后置配置执行完毕！${NC}"
+echo -e "${GREEN}✓ 软件批量安装与字体库注册执行完毕！${NC}"

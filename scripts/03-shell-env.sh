@@ -40,18 +40,4 @@ if [ -f "$PROJECT_ROOT/configs/starship.toml" ]; then
   echo -e "${GREEN}✓ Starship 主题配置已就绪 (~/.config/starship.toml)。${NC}"
 fi
 
-# 4. SSH 代理配置 (1Password Agent 与 GitHub 443 穿透)
-if [ -f "$PROJECT_ROOT/configs/ssh_config" ]; then
-  echo -e "${YELLOW}>> 增量部署 ~/.ssh/config...${NC}"
-  mkdir -p "$HOME/.ssh"
-  inject_or_update_block "$HOME/.ssh/config" "mac-init" "$PROJECT_ROOT/configs/ssh_config"
-  chmod 600 "$HOME/.ssh/config"
-  echo -e "${GREEN}✓ SSH 配置已增量同步 (~/.ssh/config)。${NC}"
-fi
-
-# 5. 终端 Nerd Font 字体自动注入与隔离清除
-if [ -f "$PROJECT_ROOT/scripts/configure-terminal-font.py" ]; then
-  python3 "$PROJECT_ROOT/scripts/configure-terminal-font.py" || true
-fi
-
-echo -e "${GREEN}✓ Shell 与系统基础环境配置完毕！${NC}"
+echo -e "${GREEN}✓ Shell 基础环境与目录规范配置完毕！${NC}"
