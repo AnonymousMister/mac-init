@@ -76,12 +76,12 @@
 ### 桌面 GUI 软件 (Cask)
 - **开发与运维**：`orbstack`、`jetbrains-toolbox`、`apifox`、`termius`、`remote-desktop-manager`、`codebuddy-cn`、`font-jetbrains-mono-nerd-font`
 - **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`libreoffice`、`keka`、`xiaoheiribao` (小黑日报)
-- **网络、云盘与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-universal`、`x1a0he-wechat-plugin`、`wetype` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`loon`
+- **网络、云盘与系统工具**：`1password`、`google-chrome`、`adguard`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`wechat-universal`、`x1a0he-wechat-plugin`、`wechat-input` (微信输入法)、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`loon`
 
-### Mac App Store 应用 (mas 共 25 款)
+### Mac App Store 应用 (mas 共 24 款)
 - **通信与协作**：`钉钉`、`飞书`、`QQ`、`Telegram`、`腾讯会议`
 - **核心开发与网络**：`nblink` (1Password 隧道强依赖)、`CotEditor`、`TestFlight`、`Windows App`
-- **办公与扩展**：`Microsoft Office 套件` (Word / Excel / PowerPoint / OneDrive)、`WPS Office`、`1Password for Safari`、`沉浸式翻译`、`PastePal`、`Amphetamine`、`Barbee`、`Notion Web Clipper`、`Save to Raindrop.io`
+- **办公与扩展**：`Microsoft Office 套件` (Word / Excel / PowerPoint / OneDrive)、`WPS Office`、`1Password for Safari`、`沉浸式翻译`、`PastePal`、`Amphetamine`、`Barbee`、`Save to Raindrop.io`
 - **影音娱乐**：`网易云音乐`、`腾讯视频`、`网易爆米花`、`淘宝桌面版`
 
 ---
