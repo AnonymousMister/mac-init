@@ -84,7 +84,15 @@
 
 ### 9. 1Password SSH Agent 远端隧道守护
 - 配置 LaunchAgent 开机守护进程（`com.zhang.mac-1password-agent-tunnel.plist`）。
+- 封装独立轻量 App Bundle 并完成本地签名，在 macOS 登录项中展现专属名称与图标。
 - 开机自启保活，将本地 1Password SSH Agent Socket 反向代理到远程开发机，支持断线自动检测重连与 NodeLink 进程状态监控。
+- 内置 500 KB 错误日志自动轮转裁剪防爆机制，杜绝撑满磁盘。
+- 提供 `op-tunnel` 专属快捷管理命令行：
+  - `op-tunnel status`：查看守护进程、1Password Socket、NodeLink 及远端 SSH 隧道链路状态。
+  - `op-tunnel stop`：立即彻底停止服务并清理远端机器残留 Socket。
+  - `op-tunnel start` / `op-tunnel restart`：启动或重启隧道守护。
+  - `op-tunnel logs [-f]`：查看或实时跟踪错误日志。
+  - `op-tunnel config`：快速编辑远端主机与 Socket 配置文件。
 
 ---
 

@@ -93,3 +93,18 @@ if [ -f "$TEMPLATE_FILE" ]; then
 else
   echo -e "${RED}[警告] 未找到模板文件: $TEMPLATE_FILE${NC}"
 fi
+
+# 安装 op-tunnel 快捷管理 CLI 工具至 ~/.local/bin
+mkdir -p "$HOME/.local/bin"
+CLI_SRC="$PROJECT_ROOT/services/op-tunnel"
+if [ -f "$CLI_SRC" ]; then
+  cp "$CLI_SRC" "$HOME/.local/bin/op-tunnel"
+  chmod +x "$HOME/.local/bin/op-tunnel"
+  echo -e "${GREEN}✓ op-tunnel 快捷管理命令行工具已安装至: $HOME/.local/bin/op-tunnel${NC}"
+  echo -e "${CYAN}提示：您可在终端随时使用以下快捷命令管理隧道：${NC}"
+  echo -e "  - ${YELLOW}op-tunnel status${NC}  : 查看隧道运行与连接状态"
+  echo -e "  - ${YELLOW}op-tunnel stop${NC}    : 立即停止服务并彻底清理远端 Socket"
+  echo -e "  - ${YELLOW}op-tunnel start${NC}   : 重新启动服务"
+  echo -e "  - ${YELLOW}op-tunnel restart${NC} : 重启服务"
+  echo -e "  - ${YELLOW}op-tunnel logs -f${NC} : 实时查看错误日志"
+fi
