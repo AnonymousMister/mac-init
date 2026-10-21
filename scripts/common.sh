@@ -56,9 +56,12 @@ activate_brew() {
 read_input() {
   local prompt="$1"
   local var_name="$2"
+  if [ -n "$NONINTERACTIVE" ] || [ -n "$CI" ]; then
+    return 0
+  fi
   if [ -t 0 ]; then
     read -p "$prompt" "$var_name"
-  else
+  elif [ -r /dev/tty ]; then
     read -p "$prompt" "$var_name" < /dev/tty
   fi
 }
