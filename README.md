@@ -94,12 +94,12 @@
 `mise` (运行时管理)、`uv` (Python极速包管理)、`starship` (终端提示符，预置定制 Gruvbox 主题配置)、`mas` (Mac App Store命令行)、`rtk`、`smartmontools`、`telnet`、`goreleaser`
 
 ### 桌面 GUI 软件 (Cask)
-- **开发与运维**：`orbstack`、`jetbrains-gateway`、`apifox`、`remote-desktop-manager`、`codebuddy-cn`、`workbuddy-cn`、`font-jetbrains-mono-nerd-font`
+- **开发与运维**：`orbstack`、`jetbrains-gateway`、`apifox`、`remote-desktop-manager`、`nomachine-enterprise-client`、`zync-sh`、`codebuddy-cn`、`workbuddy-cn`、`font-jetbrains-mono-nerd-font`
 - **AI 与效率**：`chatgpt`、`google-gemini`、`cc-switch`、`notion`、`keka`、`xiaoheiribao` (小黑日报)
-- **网络、云盘与系统工具**：`1password`、`google-chrome`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`tencent-lemon`、`dbx`、`homebrew-app`、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`logi-options-plus-mini` (罗技驱动精简版)
+- **网络、云盘与系统工具**：`1password`、`google-chrome`、`aldente`、`soundsource`、`switchhosts`、`tailscale-app`、`mountain-duck`、`mac-sai`、`dbx`、`homebrew-app`、`123pan` (123云盘)、`feiniu-sync` (飞牛同步)、`swiftycrow`、`logi-options-plus-mini` (罗技驱动精简版)
 > *注：微信官方 Universal 版及 X1a0He 防撤回插件由【模块 08 / 菜单 9】独立管理（避免 Brewfile 覆盖重签补丁）。*
 
-### Mac App Store 应用 (mas 共 18 款)
+### Mac App Store 应用 (mas 共 21 款)
 - **通信与协作**：`钉钉`、`QQ`、`Telegram`、`腾讯会议`
 - **核心开发与网络**：`nblink` (1Password 隧道强依赖)、`CotEditor`、`TestFlight`、`Windows App`
 - **办公与扩展**：`Microsoft Office 套件` (Word / Excel / PowerPoint / OneDrive)、`WPS Office`、`1Password for Safari`、`沉浸式翻译`、`PastePal`、`Amphetamine`、`Barbee`
